@@ -2,42 +2,17 @@ import { useEffect, useState } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 
 import { AppBar, Button, Toolbar, Typography } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add'
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore'
+
+import { paths } from '../config'
 
 function Navbar() {
     const { pathname } = useLocation()
-
-    // Сhatgpt сказал лучше задать начальное состояние.
-    // До этого стейты создавались пустыми.
-    // Как правильно? Мне кажется, что хранить одно и то же
-    // в разных местах усложнит будущее редактирование.
-    const [title, setTitle] = useState('To Do')
-    const [link, setLink] = useState({
-        path: 'add-task',
-        text: 'Add Task',
-        icon: <AddIcon />,
-    })
+    const [title, setTitle] = useState(paths['/'].title)
+    const [link, setLink] = useState(paths['/'].link)
 
     useEffect(() => {
-        switch (pathname) {
-            case '/add-task':
-                setTitle('Add Task')
-                setLink({
-                    path: '/',
-                    text: 'Go back',
-                    icon: <NavigateBeforeIcon />,
-                })
-                break
-            default:
-                setTitle('To Do')
-                setLink({
-                    path: 'add-task',
-                    text: 'Add Task',
-                    icon: <AddIcon />,
-                })
-                break
-        }
+        setTitle(paths[pathname].title)
+        setLink(paths[pathname].link)
     }, [pathname])
 
     return (
