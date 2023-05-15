@@ -19,7 +19,7 @@ function TaskItem({ task }) {
 
     return (
         <ClickAwayListener onClickAway={endEditing}>
-            <Tooltip title={task.description} placement='bottom-start'>
+            <Tooltip title={task.description} placement='bottom-start' arrow>
                 <ListItem
                     component={Paper}
                     square

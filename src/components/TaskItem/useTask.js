@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { updateTask, removeTask } from '../../store/tasksSlice'
 
@@ -9,6 +9,12 @@ export function useTask(task) {
     const [isEditing, setIsEditing] = useState(false)
     const [title, setTitle] = useState(task.title)
     const [isCompleted, setIsCompleted] = useState(task.isCompleted)
+
+    // Добавил потому, что при использовании isCompleted в useEffect
+    // сохранение в стор триггерилось при рендере.
+    // А если вызывать handleSave в toggleCompletion, после setIsCompleted
+    //  то в стор летело прошлое значение.
+    const [isModified, setIsModified] = useState(false)
 
     const startEditing = useCallback(() => {
         setIsEditing(true)
@@ -23,6 +29,7 @@ export function useTask(task) {
         dispatch(updateTask({ task }))
 
         setIsEditing(false)
+        setIsModified(false)
     }, [dispatch, id, title, isCompleted, description])
 
     const handleDelete = useCallback(() => {
@@ -33,8 +40,12 @@ export function useTask(task) {
 
     const toggleCompletion = useCallback(() => {
         setIsCompleted(prev => !prev)
-        handleSave()
-    }, [handleSave])
+        setIsModified(true)
+    }, [])
+
+    useEffect(() => {
+        if (isModified) handleSave()
+    }, [isModified, handleSave])
 
     return {
         isEditing,

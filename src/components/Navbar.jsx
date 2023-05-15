@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 
-import { AppBar, Button, Toolbar, Typography } from '@mui/material'
-
 import { paths } from '../config'
+
+import { AppBar, Button, Toolbar, Typography } from '@mui/material'
 
 function Navbar() {
     const { pathname } = useLocation()
