@@ -1,7 +1,7 @@
 import AddIcon from '@mui/icons-material/Add'
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore'
 
-export const paths = {
+export const PATHS = {
     '/': {
         title: 'To Do',
         link: {

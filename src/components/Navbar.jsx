@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 
-import { paths } from '../config'
+import { PATHS } from '../config'
 
 import { AppBar, Button, Toolbar, Typography } from '@mui/material'
 
 function Navbar() {
     const { pathname } = useLocation()
-    const [title, setTitle] = useState(paths['/'].title)
-    const [link, setLink] = useState(paths['/'].link)
+    const [title, setTitle] = useState(PATHS['/'].title)
+    const [link, setLink] = useState(PATHS['/'].link)
 
     useEffect(() => {
-        setTitle(paths[pathname].title)
-        setLink(paths[pathname].link)
+        setTitle(PATHS[pathname].title)
+        setLink(PATHS[pathname].link)
     }, [pathname])
 
     return (

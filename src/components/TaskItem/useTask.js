@@ -12,8 +12,8 @@ export function useTask(task) {
 
     // Добавил потому, что при использовании isCompleted в useEffect
     // сохранение в стор триггерилось при рендере.
-    // А если вызывать handleSave в toggleCompletion, после setIsCompleted
-    //  то в стор летело прошлое значение.
+    // А если вызывать handleSave в toggleCompletion после setIsCompleted,
+    // то в стор летело прошлое значение.
     const [isModified, setIsModified] = useState(false)
 
     const startEditing = useCallback(() => {
