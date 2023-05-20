@@ -18,14 +18,14 @@ export function Form({ onSubmit }) {
         <form onSubmit={handleSubmit(createTask)}>
             <TextField
                 label='Title'
-                error={errors.title}
+                error={Boolean(errors.title)}
                 helperText={errors.title && 'This field cannot be empty'}
                 sx={{ width: '100%', mb: 1 }}
                 {...register('title', { required: true })}
             />
             <TextField
                 label='Description'
-                error={errors.description}
+                error={Boolean(errors.description)}
                 helperText={errors.description && 'This field cannot be empty'}
                 sx={{ width: '100%', mb: 1 }}
                 {...register('description', { required: true })}
