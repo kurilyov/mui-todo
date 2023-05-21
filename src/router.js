@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import AddTask from './pages/AddTask'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'
+import { AuthRequired } from './hoc/AuthRequired'
 
 export const router = createBrowserRouter([
     {
@@ -12,11 +13,19 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Home />,
+                element: (
+                    <AuthRequired>
+                        <Home />
+                    </AuthRequired>
+                ),
             },
             {
                 path: 'add-task',
-                element: <AddTask />,
+                element: (
+                    <AuthRequired>
+                        <AddTask />
+                    </AuthRequired>
+                ),
             },
             {
                 path: 'login',
