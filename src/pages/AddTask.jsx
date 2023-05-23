@@ -10,8 +10,7 @@ function AddTask() {
     const dispatch = useDispatch()
 
     const handleAddTask = task => {
-        dispatch(createTask({ task }))
-        navigate('/')
+        dispatch(createTask({ task })).then(() => navigate('/'))
     }
 
     return <Form onSubmit={handleAddTask} />

@@ -1,9 +1,9 @@
 import { useState, useCallback, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { updateTask, removeTask } from '../../store/tasksSlice'
+import { updateTask, deleteTask } from '../../store/tasksSlice'
 
 export function useTask(task) {
-    const { id, description } = task
+    const { _id, description, by } = task
     const dispatch = useDispatch()
 
     const [isEditing, setIsEditing] = useState(false)
@@ -25,16 +25,15 @@ export function useTask(task) {
     }, [task.title])
 
     const handleSave = useCallback(() => {
-        const task = { id, title, description, isCompleted }
+        const task = { _id, title, description, isCompleted, by }
         dispatch(updateTask({ task }))
-
         setIsEditing(false)
         setIsModified(false)
-    }, [dispatch, id, title, isCompleted, description])
+    }, [dispatch, _id, title, isCompleted, description, by])
 
     const handleDelete = useCallback(() => {
-        dispatch(removeTask({ id }))
-    }, [dispatch, id])
+        dispatch(deleteTask({ _id }))
+    }, [dispatch, _id])
 
     const updateTitle = useCallback(event => setTitle(event.target.value), [])
 

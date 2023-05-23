@@ -12,7 +12,7 @@ function Home() {
         dispatch(getAllTasks())
     }, [dispatch])
 
-    if (!tasks)
+    if (!tasks.length)
         return (
             <Typography variant='h4' textAlign='center'>
                 List is empty

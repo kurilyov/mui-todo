@@ -6,7 +6,6 @@ export function Register() {
     const error = useSelector(store => store.user.error)
     const dispatch = useDispatch()
     const register = data => dispatch(registerUser(data))
-    // const register = data => console.log(data)
 
     return (
         <>

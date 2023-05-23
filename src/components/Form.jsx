@@ -11,7 +11,7 @@ export function Form({ onSubmit }) {
     } = useForm()
 
     function createTask(data) {
-        onSubmit({ ...data, id: uuidv4(), isCompleted: false })
+        onSubmit({ ...data })
     }
 
     return (
