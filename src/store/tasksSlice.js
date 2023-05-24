@@ -89,22 +89,7 @@ const tasksSlice = createSlice({
         status: null,
         error: null,
     },
-    reducers: {
-        // getTasks(state, { payload }) {
-        //     state.tasks = payload.tasks
-        // },
-        // createTask(state, { payload }) {
-        //     state.tasks.push(payload.task)
-        // },
-        // updateTask(state, { payload }) {
-        //     state.tasks = state.tasks.map(task =>
-        //         task.id === payload.task.id ? payload.task : task,
-        //     )
-        // },
-        // removeTask(state, { payload }) {
-        //     state.tasks = state.tasks.filter(task => task.id !== payload.id)
-        // },
-    },
+
     extraReducers: {
         [getAllTasks.pending]: state => {
             state.status = 'loading'

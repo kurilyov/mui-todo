@@ -7,10 +7,13 @@ export const registerUser = createAsyncThunk(
     'user/register',
     async (userData, { rejectWithValue }) => {
         try {
-            await axios.post(`${API_URL}/user/register`, userData)
-            return
+            const response = await axios.post(
+                `${API_URL}/user/register`,
+                userData,
+            )
+            return response
         } catch (error) {
-            return rejectWithValue(error.message)
+            return rejectWithValue(error.response.data)
         }
     },
 )
@@ -31,21 +34,26 @@ const userSlice = createSlice({
     name: 'user',
     initialState: {
         user: null,
-        loading: false,
         error: null,
+    },
+    reducers: {
+        clearUser(state) {
+            state.user = null
+        },
     },
     extraReducers: {
         [registerUser.pending]: state => {
             state.status = 'loading'
             state.error = null
         },
-        [registerUser.fulfilled]: state => {
+        [registerUser.fulfilled]: (state, { payload }) => {
             state.status = 'resolved'
         },
         [registerUser.rejected]: (state, { payload }) => {
             state.status = 'error'
             state.error = payload
         },
+
         [loginUser.pending]: state => {
             state.status = 'loading'
             state.error = null
@@ -61,4 +69,5 @@ const userSlice = createSlice({
     },
 })
 
+export const { clearUser } = userSlice.actions
 export default userSlice.reducer

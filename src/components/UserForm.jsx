@@ -8,6 +8,11 @@ export function UserForm({ onSubmit, buttonText }) {
         formState: { errors },
     } = useForm()
 
+    const passwordErrors = {
+        minLength: 'Password must be at least 8 characters long',
+        required: 'This field cannot be empty',
+    }
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <TextField
@@ -21,9 +26,11 @@ export function UserForm({ onSubmit, buttonText }) {
                 label='Password'
                 type='password'
                 error={Boolean(errors.password)}
-                helperText={errors.password && 'This field cannot be empty'}
+                helperText={
+                    errors.password && passwordErrors[errors.password.type]
+                }
                 sx={{ width: '100%', mb: 1 }}
-                {...register('password', { required: true })}
+                {...register('password', { required: true, minLength: 8 })}
             />
             <Button variant='contained' sx={{ float: 'right' }} type='submit'>
                 {buttonText}
